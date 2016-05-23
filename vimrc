@@ -907,59 +907,59 @@ filetype plugin indent on    " required
             let g:neocomplcache_keyword_patterns._ = '\h\w*'
 
             " Plugin key-mappings {
-                " These two lines conflict with the default digraph mapping of <C-K>
-                imap <C-k> <Plug>(neosnippet_expand_or_jump)
-                smap <C-k> <Plug>(neosnippet_expand_or_jump)
-                if exists('g:spf13_noninvasive_completion')
-                    inoremap <CR> <CR>
-                    " <ESC> takes you out of insert mode
-                    inoremap <expr> <Esc>   pumvisible() ? "\<C-y>\<Esc>" : "\<Esc>"
-                    " <CR> accepts first, then sends the <CR>
-                    inoremap <expr> <CR>    pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
-                    " <Down> and <Up> cycle like <Tab> and <S-Tab>
-                    inoremap <expr> <Down>  pumvisible() ? "\<C-n>" : "\<Down>"
-                    inoremap <expr> <Up>    pumvisible() ? "\<C-p>" : "\<Up>"
-                    " Jump up and down the list
-                    inoremap <expr> <C-d>   pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
-                    inoremap <expr> <C-u>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
-                else
-                    imap <silent><expr><C-k> neosnippet#expandable() ?
-                                \ "\<Plug>(neosnippet_expand_or_jump)" : (pumvisible() ?
-                                \ "\<C-e>" : "\<Plug>(neosnippet_expand_or_jump)")
-                    smap <TAB> <Right><Plug>(neosnippet_jump_or_expand)
+            " These two lines conflict with the default digraph mapping of <C-K>
+            imap <C-k> <Plug>(neosnippet_expand_or_jump)
+            smap <C-k> <Plug>(neosnippet_expand_or_jump)
+            if exists('g:spf13_noninvasive_completion')
+                inoremap <CR> <CR>
+                " <ESC> takes you out of insert mode
+                inoremap <expr> <Esc>   pumvisible() ? "\<C-y>\<Esc>" : "\<Esc>"
+                " <CR> accepts first, then sends the <CR>
+                inoremap <expr> <CR>    pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
+                " <Down> and <Up> cycle like <Tab> and <S-Tab>
+                inoremap <expr> <Down>  pumvisible() ? "\<C-n>" : "\<Down>"
+                inoremap <expr> <Up>    pumvisible() ? "\<C-p>" : "\<Up>"
+                " Jump up and down the list
+                inoremap <expr> <C-d>   pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
+                inoremap <expr> <C-u>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
+            else
+                imap <silent><expr><C-k> neosnippet#expandable() ?
+                            \ "\<Plug>(neosnippet_expand_or_jump)" : (pumvisible() ?
+                            \ "\<C-e>" : "\<Plug>(neosnippet_expand_or_jump)")
+                smap <TAB> <Right><Plug>(neosnippet_jump_or_expand)
 
-                    inoremap <expr><C-g> neocomplcache#undo_completion()
-                    inoremap <expr><C-l> neocomplcache#complete_common_string()
-                    "inoremap <expr><CR> neocomplcache#complete_common_string()
+                inoremap <expr><C-g> neocomplcache#undo_completion()
+                inoremap <expr><C-l> neocomplcache#complete_common_string()
+                "inoremap <expr><CR> neocomplcache#complete_common_string()
 
-                    function! CleverCr()
-                        if pumvisible()
-                            if neosnippet#expandable()
-                                let exp = "\<Plug>(neosnippet_expand)"
-                                return exp . neocomplcache#close_popup()
-                            else
-                                return neocomplcache#close_popup()
-                            endif
+                function! CleverCr()
+                    if pumvisible()
+                        if neosnippet#expandable()
+                            let exp = "\<Plug>(neosnippet_expand)"
+                            return exp . neocomplcache#close_popup()
                         else
-                            return "\<CR>"
+                            return neocomplcache#close_popup()
                         endif
-                    endfunction
+                    else
+                        return "\<CR>"
+                    endif
+                endfunction
 
-                    " <CR> close popup and save indent or expand snippet
-                    imap <expr> <CR> CleverCr()
+                " <CR> close popup and save indent or expand snippet
+                imap <expr> <CR> CleverCr()
 
-                    " <CR>: close popup
-                    " <s-CR>: close popup and save indent.
-                    inoremap <expr><s-CR> pumvisible() ? neocomplcache#close_popup()."\<CR>" : "\<CR>"
-                    "inoremap <expr><CR> pumvisible() ? neocomplcache#close_popup() : "\<CR>"
+                " <CR>: close popup
+                " <s-CR>: close popup and save indent.
+                inoremap <expr><s-CR> pumvisible() ? neocomplcache#close_popup()."\<CR>" : "\<CR>"
+                "inoremap <expr><CR> pumvisible() ? neocomplcache#close_popup() : "\<CR>"
 
-                    " <C-h>, <BS>: close popup and delete backword char.
-                    inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-                    inoremap <expr><C-y> neocomplcache#close_popup()
-                endif
-                " <TAB>: completion.
-                inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-                inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
+                " <C-h>, <BS>: close popup and delete backword char.
+                inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+                inoremap <expr><C-y> neocomplcache#close_popup()
+            endif
+            " <TAB>: completion.
+            inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+            inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
             " }
 
             " Enable omni completion.
@@ -981,10 +981,10 @@ filetype plugin indent on    " required
             let g:neocomplcache_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
             let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
             let g:neocomplcache_omni_patterns.go = '\h\w*\.\?'
-    " }
-    " Normal Vim omni-completion {
-    " To disable omni complete, add the following to your .vimrc.before.local file:
-    "   let g:spf13_no_omni_complete = 1
+            " }
+            " Normal Vim omni-completion {
+            " To disable omni complete, add the following to your .vimrc.before.local file:
+            "   let g:spf13_no_omni_complete = 1
         elseif !exists('g:spf13_no_omni_complete')
             " Enable omni-completion.
             autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -996,9 +996,9 @@ filetype plugin indent on    " required
             autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
         endif
-    " }
+        " }
 
-    " Snippets {
+        " Snippets {
         if count(g:spf13_bundle_groups, 'neocomplcache') ||
                     \ count(g:spf13_bundle_groups, 'neocomplete')
 
@@ -1023,40 +1023,40 @@ filetype plugin indent on    " required
             " especially when splits are used.
             set completeopt-=preview
         endif
-    " }
+        " }
 
-    " FIXME: Isn't this for Syntastic to handle?
-    " Haskell post write lint and check with ghcmod
-    " $ `cabal install ghcmod` if missing and ensure
-    " ~/.cabal/bin is in your $PATH.
-    if !executable("ghcmod")
-        autocmd BufWritePost *.hs GhcModCheckAndLintAsync
-    endif
+        " FIXME: Isn't this for Syntastic to handle?
+        " Haskell post write lint and check with ghcmod
+        " $ `cabal install ghcmod` if missing and ensure
+        " ~/.cabal/bin is in your $PATH.
+        if !executable("ghcmod")
+            autocmd BufWritePost *.hs GhcModCheckAndLintAsync
+        endif
 
-    " UndoTree {
+        " UndoTree {
         if isdirectory(expand("~/.vim/bundle/undotree/"))
             nnoremap <Leader>u :UndotreeToggle<CR>
             " If undotree is opened, it is likely one wants to interact with it.
             let g:undotree_SetFocusWhenToggle=1
         endif
-    " }
+        " }
 
-    " indent_guides {
+        " indent_guides {
         if isdirectory(expand("~/.vim/bundle/vim-indent-guides/"))
             let g:indent_guides_start_level = 2
             let g:indent_guides_guide_size = 1
             let g:indent_guides_enable_on_vim_startup = 1
         endif
-    " }
+        " }
 
-    " Wildfire {
-    let g:wildfire_objects = {
-                \ "*" : ["i'", 'i"', "i)", "i]", "i}", "ip"],
-                \ "html,xml" : ["at"],
-                \ }
-    " }
+        " Wildfire {
+        let g:wildfire_objects = {
+                    \ "*" : ["i'", 'i"', "i)", "i]", "i}", "ip"],
+                    \ "html,xml" : ["at"],
+                    \ }
+        " }
 
-    " vim-airline {
+        " vim-airline {
         " Set configuration options for the statusline plugin vim-airline.
         " Use the powerline theme and optionally enable powerline symbols.
         " To use the symbols , , , , , , and .in the statusline
@@ -1077,276 +1077,299 @@ filetype plugin indent on    " required
                 let g:airline_right_sep='‹' " Slightly fancier than '<'
             endif
         endif
-    " }
+        " }
 
-" }
+        " }
 
-" GUI Settings {
+        " GUI Settings {
 
-    " GVIM- (here instead of .gvimrc)
-    if has('gui_running')
-        set guioptions-=T           " Remove the toolbar
-        set lines=40                " 40 lines of text instead of 24
-        if !exists("g:spf13_no_big_font")
-            if LINUX() && has("gui_running")
-                set guifont=Andale\ Mono\ Regular\ 12,Menlo\ Regular\ 11,Consolas\ Regular\ 12,Courier\ New\ Regular\ 14
-            elseif OSX() && has("gui_running")
-                set guifont=Andale\ Mono\ Regular:h12,Menlo\ Regular:h11,Consolas\ Regular:h12,Courier\ New\ Regular:h14
-            elseif WINDOWS() && has("gui_running")
-                set guifont=Andale_Mono:h10,Menlo:h10,Consolas:h10,Courier_New:h10
-            endif
-        endif
-    else
-        if &term == 'xterm' || &term == 'screen'
-            set t_Co=256            " Enable 256 colors to stop the CSApprox warning and make xterm vim shine
-        endif
-        "set term=builtin_ansi       " Make arrow and other keys work
-    endif
-
-" }
-
-" Functions {
-
-    " Initialize directories {
-    function! InitializeDirectories()
-        let parent = $HOME
-        let prefix = 'vim'
-        let dir_list = {
-                    \ 'backup': 'backupdir',
-                    \ 'views': 'viewdir',
-                    \ 'swap': 'directory' }
-
-        if has('persistent_undo')
-            let dir_list['undo'] = 'undodir'
-        endif
-
-        " To specify a different directory in which to place the vimbackup,
-        " vimviews, vimundo, and vimswap files/directories, add the following to
-        " your .vimrc.before.local file:
-        "   let g:spf13_consolidated_directory = <full path to desired directory>
-        "   eg: let g:spf13_consolidated_directory = $HOME . '/.vim/'
-        if exists('g:spf13_consolidated_directory')
-            let common_dir = g:spf13_consolidated_directory . prefix
-        else
-            let common_dir = parent . '/.' . prefix
-        endif
-
-        for [dirname, settingname] in items(dir_list)
-            let directory = common_dir . dirname . '/'
-            if exists("*mkdir")
-                if !isdirectory(directory)
-                    call mkdir(directory)
+        " GVIM- (here instead of .gvimrc)
+        if has('gui_running')
+            set guioptions-=T           " Remove the toolbar
+            set lines=40                " 40 lines of text instead of 24
+            if !exists("g:spf13_no_big_font")
+                if LINUX() && has("gui_running")
+                    set guifont=Andale\ Mono\ Regular\ 12,Menlo\ Regular\ 11,Consolas\ Regular\ 12,Courier\ New\ Regular\ 14
+                elseif OSX() && has("gui_running")
+                    set guifont=Andale\ Mono\ Regular:h12,Menlo\ Regular:h11,Consolas\ Regular:h12,Courier\ New\ Regular:h14
+                elseif WINDOWS() && has("gui_running")
+                    set guifont=Andale_Mono:h10,Menlo:h10,Consolas:h10,Courier_New:h10
                 endif
             endif
-            if !isdirectory(directory)
-                echo "Warning: Unable to create backup directory: " . directory
-                echo "Try: mkdir -p " . directory
-            else
-                let directory = substitute(directory, " ", "\\\\ ", "g")
-                exec "set " . settingname . "=" . directory
+        else
+            if &term == 'xterm' || &term == 'screen'
+                set t_Co=256            " Enable 256 colors to stop the CSApprox warning and make xterm vim shine
             endif
-        endfor
-    endfunction
-    call InitializeDirectories()
-    " }
-
-    " Initialize NERDTree as needed {
-    function! NERDTreeInitAsNeeded()
-        redir => bufoutput
-        buffers!
-        redir END
-        let idx = stridx(bufoutput, "NERD_tree")
-        if idx > -1
-            NERDTreeMirror
-            NERDTreeFind
-            wincmd l
+            "set term=builtin_ansi       " Make arrow and other keys work
         endif
-    endfunction
-    " }
 
-    " Strip whitespace {
-    function! StripTrailingWhitespace()
-        " Preparation: save last search, and cursor position.
-        let _s=@/
-        let l = line(".")
-        let c = col(".")
-        " do the business:
-        %s/\s\+$//e
-        " clean up: restore previous search history, and cursor position
-        let @/=_s
-        call cursor(l, c)
-    endfunction
-    " }
+        " }
 
-    " Shell command {
-    function! s:RunShellCommand(cmdline)
-        botright new
+        " Functions {
 
-        setlocal buftype=nofile
-        setlocal bufhidden=delete
-        setlocal nobuflisted
-        setlocal noswapfile
-        setlocal wrap
-        set wrap
-        "set textwidth=30
-        "set columns=57
-        "setlocal nowrap
-        setlocal filetype=shell
-        setlocal syntax=shell
+        " Initialize directories {
+        function! InitializeDirectories()
+            let parent = $HOME
+            let prefix = 'vim'
+            let dir_list = {
+                        \ 'backup': 'backupdir',
+                        \ 'views': 'viewdir',
+                        \ 'swap': 'directory' }
 
-        call setline(1, a:cmdline)
-        call setline(2, substitute(a:cmdline, '.', '=', 'g'))
-        execute 'silent $read !' . escape(a:cmdline, '%#')
-        setlocal nomodifiable
-        1
-    endfunction
+            if has('persistent_undo')
+                let dir_list['undo'] = 'undodir'
+            endif
 
-    command! -complete=file -nargs=+ Shell call s:RunShellCommand(<q-args>)
-    " e.g. Grep current file for <search_term>: Shell grep -Hn <search_term> %
-    " }
+            " To specify a different directory in which to place the vimbackup,
+            " vimviews, vimundo, and vimswap files/directories, add the following to
+            " your .vimrc.before.local file:
+            "   let g:spf13_consolidated_directory = <full path to desired directory>
+            "   eg: let g:spf13_consolidated_directory = $HOME . '/.vim/'
+            if exists('g:spf13_consolidated_directory')
+                let common_dir = g:spf13_consolidated_directory . prefix
+            else
+                let common_dir = parent . '/.' . prefix
+            endif
 
-" }
+            for [dirname, settingname] in items(dir_list)
+                let directory = common_dir . dirname . '/'
+                if exists("*mkdir")
+                    if !isdirectory(directory)
+                        call mkdir(directory)
+                    endif
+                endif
+                if !isdirectory(directory)
+                    echo "Warning: Unable to create backup directory: " . directory
+                    echo "Try: mkdir -p " . directory
+                else
+                    let directory = substitute(directory, " ", "\\\\ ", "g")
+                    exec "set " . settingname . "=" . directory
+                endif
+            endfor
+        endfunction
+        call InitializeDirectories()
+        " }
 
-" Use fork vimrc if available {
-    if filereadable(expand("~/.vimrc.fork"))
-        source ~/.vimrc.fork
-    endif
-" }
+        " Initialize NERDTree as needed {
+        function! NERDTreeInitAsNeeded()
+            redir => bufoutput
+            buffers!
+            redir END
+            let idx = stridx(bufoutput, "NERD_tree")
+            if idx > -1
+                NERDTreeMirror
+                NERDTreeFind
+                wincmd l
+            endif
+        endfunction
+        " }
 
-" Use local vimrc if available {
-    if filereadable(expand("~/.vimrc.local"))
-        source ~/.vimrc.local
-    endif
-" }
+        " Strip whitespace {
+        function! StripTrailingWhitespace()
+            " Preparation: save last search, and cursor position.
+            let _s=@/
+            let l = line(".")
+            let c = col(".")
+            " do the business:
+            %s/\s\+$//e
+            " clean up: restore previous search history, and cursor position
+            let @/=_s
+            call cursor(l, c)
+        endfunction
+        " }
 
-" Use local gvimrc if available and gui is running {
-    if has('gui_running')
-        if filereadable(expand("~/.gvimrc.local"))
-            source ~/.gvimrc.local
+        " Shell command {
+        function! s:RunShellCommand(cmdline)
+            botright new
+
+            setlocal buftype=nofile
+            setlocal bufhidden=delete
+            setlocal nobuflisted
+            setlocal noswapfile
+            setlocal wrap
+            set wrap
+            "set textwidth=30
+            "set columns=57
+            "setlocal nowrap
+            setlocal filetype=shell
+            setlocal syntax=shell
+
+            call setline(1, a:cmdline)
+            call setline(2, substitute(a:cmdline, '.', '=', 'g'))
+            execute 'silent $read !' . escape(a:cmdline, '%#')
+            setlocal nomodifiable
+            1
+        endfunction
+
+        command! -complete=file -nargs=+ Shell call s:RunShellCommand(<q-args>)
+        " e.g. Grep current file for <search_term>: Shell grep -Hn <search_term> %
+        " }
+
+        " }
+
+        " Use fork vimrc if available {
+        if filereadable(expand("~/.vimrc.fork"))
+            source ~/.vimrc.fork
         endif
-    endif
-" }
+        " }
 
-"Sometimes the simplest things are the most valuable. The 2 lines in my .vimrc that are totally indispensable:
+        " Use local vimrc if available {
+        if filereadable(expand("~/.vimrc.local"))
+            source ~/.vimrc.local
+        endif
+        " }
 
-    nore ; :
-    nore : ;
+        " Use local gvimrc if available and gui is running {
+        if has('gui_running')
+            if filereadable(expand("~/.gvimrc.local"))
+                source ~/.gvimrc.local
+            endif
+        endif
+        " }
 
-"Some fixes for common typos have saved me a surprising amount of time:
-"
-":command WQ wq
-":command Wq wq
-":command W w
-":command Q q
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
+        "Sometimes the simplest things are the most valuable. The 2 lines in my .vimrc that are totally indispensable:
 
-set pastetoggle=<F9>
+        nore ; :
+        nore : ;
 
+        "Some fixes for common typos have saved me a surprising amount of time:
+        "
+        ":command WQ wq
+        ":command Wq wq
+        ":command W w
+        ":command Q q
+        highlight ExtraWhitespace ctermbg=red guibg=red
+        match ExtraWhitespace /\s\+$/
 
-"new in mac copy
-function! CopyToOSClipboard() range
-    exec(":silent !cat %:p | sed -n " . a:firstline . "," . a:lastline . "p | pbcopy")
-    :redraw!
-endfunction
-
-nnoremap <Leader><Leader>c :call CopyToOSClipboard()<CR>
-vnoremap <Leader><Leader>c :call CopyToOSClipboard()<CR>
-
-
-"new other mac
-vmap tt :w !pbcopy<CR><CR>
-
- set clipboard+=unnamed
- set clipboard+=unnamedplus
+        set pastetoggle=<F9>
 
 
+        "new in mac copy
+        function! CopyToOSClipboard() range
+            exec(":silent !cat %:p | sed -n " . a:firstline . "," . a:lastline . "p | pbcopy")
+            :redraw!
+        endfunction
 
- "wine vimrc
- if !exists("loaded_vimrc_autocmd")
-         let loaded_vimrc_autocmd=1
-             autocmd BufNewFile,BufRead ~/wine-git/* set expandtab tabstop=8 softtabstop=4 shiftwidth=4 | hi link cCommentL cError
-         endif
-
-         :vmap ,c "zda{<C-R>=substitute(substitute(@z, '\(.\)', "'\\1',", "g"), "'\\(['\\\\]\\)'", "'\\\\\\1'", "g")<CR><ESC>a'\0'}<ESC>"]'")}"
-
-
+        nnoremap <Leader><Leader>c :call CopyToOSClipboard()<CR>
+        vnoremap <Leader><Leader>c :call CopyToOSClipboard()<CR>
 
 
+        "new other mac
+        vmap tt :w !pbcopy<CR><CR>
 
-
-
-"编译运行
-func! CompileRun()
-    exec "w"
-    if &filetype == 'c'
-        exec "!gcc -g %  -DLOCAL_PROJECT -Wall;./a.out"
-        exec "! ./%<"
-    elseif &filetype == 'cpp'
-        exec "!g++ -g % -DLOCAL_PROJECT -Wall -std=c++11 -Wc++11-extensions ;./a.out"
-    elseif &filetype == 'java'
-        exec "!javac %"
-        exec "!java %<"
-    elseif &filetype == 'sh'
-        exec "!bash %"
-    elseif &filetype == 'python' "我添加的执行python的命令
-        exec "!python3 %"
-    elseif &filetype == 'ruby'
-        exec "!ruby %"
-    elseif &filetype == 'haskell'
-        exec "!ghc --make %"
-        exec "! ./%<"
-    endif
-endfunc
-
-nnoremap <leader>c : call CompileRun()<CR>
-
-"Run make
-func! RunMake()
-    exec "w"
-    exec "!make"
-endfunc
-nmap <leader>m : call RunMake()<CR>
-
-nnoremap n nzzzv
-nnoremap N Nzzzv
-
-imap （ (
-imap ） )
-imap 』 }
-imap 『 {
-imap 【 [
-imap 】 ]
-imap 。 .
-imap ， ,
-imap ； ;
-imap ： :
-imap “ "
-imap ” "
-imap ‘ '
-imap ’ '
-imap ？ ?
-imap ！ !
-imap 》 >
-imap 《 <
-imap 、 /
-imap ￥ $
-map ： :
+        set clipboard+=unnamed
+        set clipboard+=unnamedplus
 
 
 
-func DeleteTrailingWhiteSpace()
-    normal mZ
-    %s/\s\+$//e
-    normal `Z
-endfunc
-au BufWrite * if &ft != 'mkd' | call DeleteTrailingWhiteSpace() | endif
+        "wine vimrc
+        if !exists("loaded_vimrc_autocmd")
+            let loaded_vimrc_autocmd=1
+            autocmd BufNewFile,BufRead ~/wine-git/* set expandtab tabstop=8 softtabstop=4 shiftwidth=4 | hi link cCommentL cError
+        endif
+
+        :vmap ,c "zda{<C-R>=substitute(substitute(@z, '\(.\)', "'\\1',", "g"), "'\\(['\\\\]\\)'", "'\\\\\\1'", "g")<CR><ESC>a'\0'}<ESC>"]'")}"
 
 
-au BufWritePost *
-            \ if getline(1) =~ "^#!/bin/[a-z]*sh" |
-            \   exe "silent !chmod a+x <afile>" |
-            \ endif
 
 
+
+
+
+        "编译运行
+        func! CompileRun()
+            exec "w"
+            if &filetype == 'c'
+                exec "!gcc -g %  -DLOCAL_PROJECT -Wall;./a.out"
+                exec "! ./%<"
+            elseif &filetype == 'cpp'
+                exec "!g++ -g % -DLOCAL_PROJECT -Wall -std=c++11 -Wc++11-extensions ;./a.out"
+            elseif &filetype == 'java'
+                exec "!javac %"
+                exec "!java %<"
+            elseif &filetype == 'sh'
+                exec "!bash %"
+            elseif &filetype == 'python' "我添加的执行python的命令
+                exec "!python3 %"
+            elseif &filetype == 'ruby'
+                exec "!ruby %"
+            elseif &filetype == 'haskell'
+                exec "!ghc --make %"
+                exec "! ./%<"
+            endif
+        endfunc
+
+        nnoremap <leader>c : call CompileRun()<CR>
+
+        "Run make
+        func! RunMake()
+            exec "w"
+            exec "!make"
+        endfunc
+        nmap <leader>m : call RunMake()<CR>
+
+        nnoremap n nzzzv
+        nnoremap N Nzzzv
+
+        imap （ (
+        imap ） )
+        imap 』 }
+        imap 『 {
+        imap 【 [
+        imap 】 ]
+        imap 。 .
+        imap ， ,
+        imap ； ;
+        imap ： :
+        imap “ "
+        imap ” "
+        imap ‘ '
+        imap ’ '
+        imap ？ ?
+        imap ！ !
+        imap 》 >
+        imap 《 <
+        imap 、 /
+        imap ￥ $
+        map ： :
+
+
+
+        func DeleteTrailingWhiteSpace()
+            normal mZ
+            %s/\s\+$//e
+            normal `Z
+        endfunc
+        au BufWrite * if &ft != 'mkd' | call DeleteTrailingWhiteSpace() | endif
+
+
+        au BufWritePost *
+                    \ if getline(1) =~ "^#!/bin/[a-z]*sh" |
+                    \   exe "silent !chmod a+x <afile>" |
+                    \ endif
+
+
+        let g:rainbow_active = 1
+   let g:rainbow_conf = {
+    \   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+    \   'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+    \   'operators': '_,_',
+    \   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+    \   'separately': {
+    \       '*': {},
+    \       'tex': {
+    \           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+    \       },
+    \       'lisp': {
+    \           'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+    \       },
+    \       'vim': {
+    \           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+    \       },
+    \       'html': {
+    \           'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+    \       },
+    \       'css': 0,
+    \   }
+    \}
 
